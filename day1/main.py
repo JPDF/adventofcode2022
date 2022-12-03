@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 TOP = 3
 
-input_file = ROOT / 'input.txt'
+input_file = ROOT / 'input2.txt'
 
 elves_calories = []
 elve_total = 0
