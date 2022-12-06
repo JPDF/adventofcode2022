@@ -54,10 +54,10 @@ def run_procedure_9001(stacks: list[str], procedure: Procedure):
     move_crates(stacks, procedure.source, procedure.target, procedure.move_count)
 
 input_file = Path(__file__).parent / 'input.txt'
-stacks, procedures = read_input(input_file)
-stacks_9001 = deepcopy(stacks)
+stacks_9000, procedures = read_input(input_file)
+stacks_9001 = deepcopy(stacks_9000)
 for procedure in procedures:
-    run_procedure_9000(stacks, procedure)
+    run_procedure_9000(stacks_9000, procedure)
     run_procedure_9001(stacks_9001, procedure)
-print(''.join([s[0] for s in stacks[:]]))
+print(''.join([s[0] for s in stacks_9000[:]]))
 print(''.join([s[0] for s in stacks_9001[:]]))
