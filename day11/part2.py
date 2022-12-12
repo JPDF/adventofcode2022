@@ -3,6 +3,7 @@ from pathlib import Path
 from dataclasses import dataclass
 from collections.abc import Callable
 from pprint import pprint
+import math
 
 @dataclass
 class DivisionTest:
@@ -41,7 +42,7 @@ def parse_monkey(monkey_text: str):
 def monkey_inspect(monkey: Monkey, all_monkeys: list[Monkey]):
     while monkey.inventory:
         item = monkey.inventory.pop(0)
-        item = int(monkey.operation(item))
+        item = int(monkey.operation(item) % LCM)
         answer = run_test(item, monkey.test)
         all_monkeys[answer].inventory.append(item)
         monkey.inspection_count += 1
@@ -68,13 +69,16 @@ def get_monkey_shenanigans(monkeys: list[Monkey]):
     m = get_highest_monkey_inspections(monkeys, 2)
     return m[0] * m[1]
 
+LCM = 0
+
 if __name__ == '__main__':
-    input_file = Path(__file__).parent / 'example.txt'
+    input_file = Path(__file__).parent / 'input.txt'
     monkeys = create_monkeys(input_file)
+    LCM = math.lcm(*[m.test.divident for m in monkeys])
     pprint(monkeys)
     for i in range(10000):
         do_round(monkeys)
-        print(i)
+        #print(i)
     monkey_shenanigans = get_monkey_shenanigans(monkeys)
     print(monkey_shenanigans)
     
